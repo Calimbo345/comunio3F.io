@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>C-TERCERA FEB</title>
+     <!--VINCULAR EL HTML CON LOS CSS (MAIN.CSS) -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='inicio.css') }}">
+
+    <!--TEMA DE BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+
+    <!--FUENTE DE GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="container p-4 ">
+       <div class="container-fluid d-flex align-items-center justify-content-center py-5" style="min-height: 30vh;">
+            <div class="row w-100">
+                <div class="col-12 text-center">
+                    <h1 class="display-4 mb-3 fuente_oscuro">COMUNIO</h1>
+                    <h2 class="display-6 fuente_oscuro">TERCERA FEB</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid mt-5">
+            <div class="row justify-content-between"> <!-- Usamos justify-content-between para separar los contenedores -->
+                <!-- Contenedor izquierdo con el formulario para nuevos usuarios -->
+                <div class="col-md-5"> <!-- Reducimos a col-md-5 para dar espacio entre los contenedores -->
+                    <div class="card rounded-custom">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-4 fuente_oscuro">FORMULARIO PARA NUEVOS USUARIOS</h3>
+                            <form action="registro" method="post">
+                                <div class="mb-3">
+                                    <label for="InputNombre" class="form-label fuente_oscuro">INSERTAR NOMBRE</label>
+                                    <input type="text" name="nombre_nuevo" class="form-control" id="InputNombre" placeholder="NOMBRE" autofocus required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="InputNombreEquipo" class="form-label fuente_oscuro">INSERTAR NOMBRE DEL EQUIPO</label>
+                                    <input type="text" name="nombre_equipo" class="form-control" id="InputNombreEquipo" placeholder="NOMBRE DEL EQUIPO" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="InputNombreEstadio" class="form-label fuente_oscuro">INSERTAR NOMBRE DEL ESTADIO</label>
+                                    <input type="text" name="nombre_estadio_nuevo" class="form-control" id="InputNombreEstadio" placeholder="NOMBRE DEL ESTADIO" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="InputContraseña" class="form-label fuente_oscuro">INSERTAR CONTRASEÑA</label>
+                                    <input type="password" name="contrasena_nuevo" class="form-control" id="InputContraseña" placeholder="CONTRASEÑA" required>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-uniforme fuente button" data-text="Awesome">
+                                        <span class="actual-text">&nbsp;ENVIAR&nbsp;</span>
+                                        <span aria-hidden="true" class="hover-text">&nbsp;ENVIAR&nbsp;</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenedor derecho con el formulario para usuarios existentes -->
+                <div class="col-md-5" style="margin-top: 1cm"> <!-- También col-md-5 para mantener la simetría -->
+                    <div class="card rounded-custom">
+                        <div class="card-body">
+                            <div class="banner">
+                                <span class="banner-text">INICIAR SESION</span>
+                            </div>
+                            <form action="{{ url_for('login') }}" method="POST">
+                                <div class="mb-3">
+                                    <label for="InputNombre1" class="form-label fuente_oscuro">INSERTAR NOMBRE</label>
+                                    <input type="text" name="nombre" class="form-control" id="InputNombre1" placeholder="NOMBRE" autofocus required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="InputContraseña1" class="form-label fuente_oscuro">INSERTAR CONTRASEÑA</label>
+                                    <input type="password" name="contrasena" class="form-control" id="InputContraseña1" placeholder="CONTRASEÑA" required>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-uniforme fuente button" data-text="Awesome">
+                                        <span class="actual-text">&nbsp;ENVIAR&nbsp;</span>
+                                        <span aria-hidden="true" class="hover-text">&nbsp;ENVIAR&nbsp;</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

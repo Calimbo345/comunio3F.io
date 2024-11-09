@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>COMUNIO - Oficina</title>
+    <!--VINCULAR EL HTML CON EL CSS (MAIN.CSS) -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+     <!--TEMA DE BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+     <!--FUENTE DE GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+    <!--FUENTE DE GOOGLE ICONS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <style>
+        .basketball-court {
+            width: 100%;
+            max-width: 700px;
+            height: 0;
+            padding-bottom: 71.43%; /* 500px / 700px = 0.7143 */
+            background-image: url('static/pista_baloncesto.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 2px solid #000;
+            position: relative;
+            margin: 0 auto;
+        }
+        .player-position {
+            width: 4.28%; /* 30px / 700px */
+            height: 6%; /* 30px / 500px */
+            position: absolute;
+        }
+        #player1 { top: 90%; left: 45%; background-color: #FF0000; }
+        #player2 { top: 80%; right: 20%; background-color: #00FF00; }
+        #player3 { bottom: 20%; left: 15%; background-color: #0000FF; }
+        #player4 { bottom: 35%; left: 25%; background-color: #FFFF00; }
+        #player5 { bottom: 35%; right: 25%; background-color: #FF00FF; }
+
+        @media (max-width: 768px) {
+            .card {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="display-4 text-center mt-4 fuente_oscuro">OFICINA</h1>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav_transparente">
+        <a class="navbar-brand fuente fuente_neon">
+            COMUNIO
+            <span class="material-symbols-outlined icono-desplazado">sports_basketball</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link fuente" href="/competicion">
+                        COMPETICIÓN
+                        <span class="material-symbols-outlined icono-desplazado">monitoring</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fuente" href="/mercado">
+                        MERCADO
+                        <span class="material-symbols-outlined icono-desplazado">payments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fuente" href="/logout">
+                            SALIR
+                        <span class="material-symbols-outlined icono-desplazado">logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <!-- PLANTILLA DEL USUARIO -->
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card border-primary nav_transparente navbar-nav shift-right rounded-custom">
+                    <div class="card-header fuente">PRESIDENTE: <span style="color: black; font-weight: bold;">{{ nombre_usuario }}</span></div>
+                    <div class="card-header fuente">EQUIPO: <span style="color: black; font-weight: bold;">{{ nombre_equipo }}</span></div>
+                    <div class="card-header fuente">ESTADIO: <span style="color: black; font-weight: bold;">{{ nombre_estadio }}</span></div>
+                    <div class="card-header fuente">PRESUPUESTO: <span style="color: black; font-weight: bold;">{{ presupuesto }}€</span></div>
+                    <div class="card-header fuente">LIGA: <span style="color: black; font-weight: bold;">{{ nombre_liga }}</span></div>
+                    <div class="card-header fuente">POSICIÓN: <span style="color: black; font-weight: bold;">{{ posicion }}º</span></div>
+                    <div class="card-body">
+                        <h4 class="card-title fuente" style="color: black; font-weight: bold;">NOTICIAS</h4>
+                        <p class="card-text fuente">FICHAJES DEL DIA</p>
+                        <tbody>
+                            {% for noticia in noticias %}
+                            <tr class="table-light">
+                                <td class="fuente" style="color: black; font-weight: bold;">
+                                    =><span style="color: black; font-weight: bold;">{{ noticia }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><br></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLANTILLA DE LOS JUGADORES -->
+            <div class="col-lg-8 col-md-6 mb-3">
+                <div class="card border-secondary nav_transparente navbar-nav rounded-custom">
+                    <div class="card-header fuente d-flex justify-content-between align-items-center">
+                        <span style="color: black; font-weight: bold;"><span>PLANTILLA DE JUGADORES</span> {{ cantidad }}/9</span>
+                        <span>VALOR EQUIPO: <span style="color: black; font-weight: bold;">{{ valor_equipo }}€</span></span>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="fuente" style="color: black; font-weight: bold;">Nombre</th>
+                                        <th class="fuente" style="color: black; font-weight: bold;">Posición</th>
+                                        <th class="fuente" style="color: black; font-weight: bold;">Valor de Mercado</th>
+                                        <th class="fuente" style="color: black; font-weight: bold;">Valoración</th>
+                                        <th class="fuente" style="color: black; font-weight: bold;">Vender</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for nombre, datos in jugadores_usuario.items() if nombre not in ['NOMBRE', 'VAL_MERCADO', 'POSICION', 'VALORACION'] %}
+                                    <tr>
+                                        <td class="fuente" style="color: black;">{{ nombre }}</td>
+                                        <td class="fuente" style="color: black;">{{ datos['POSICION'] if datos['POSICION'] and datos['POSICION'] != "" else '-' }}</td>
+                                        <td class="fuente" style="color: black;">{{ datos['VAL_MERCADO'] }}€</td>
+                                        <td class="fuente" style="color: black;">{{ datos['VALORACION'] }}</td>
+                                        <td>
+                                            <form action="/venta" method="POST">
+                                                <input type="hidden" name="jugador_nombre" value="{{ nombre }}">
+                                                <button type="submit" class="btn btn-primary btn-sm btn-uniforme fuente button" data-text="Awesome">
+                                                    <span class="actual-text">&nbsp;VENDER&nbsp;</span>
+                                                    <span aria-hidden="true" class="hover-text">&nbsp;VENDER&nbsp;</span>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-secondary nav_transparente rounded-custom flex-grow-1" style="margin-top: 1cm; ">
+                    <div class="card-header fuente">JUGADORES</div>
+                    <div class="card-body d-flex flex-column">
+                        <h4 class="card-title">TITULARES</h4>
+                        <table>
+                            <tr>
+                                <td>
+                                    <form action="{{ url_for('oficina') }}" method="POST">
+                                        <input type="hidden" name="form_submitted" value="1">
+                                        <select class="fuente" style="color: black; width: 120px;" name="base_seleccionado" onchange="this.form.submit()">
+                                            <option value="">BASE</option>
+                                            {% if bases %}
+                                                {% for base in bases %}
+                                                    <option value="{{ base }}" {% if base == base_seleccionado %}selected{% endif %}>{{ base }}</option>
+                                                {% endfor %}
+                                            {% else %}
+                                                <option value="" disabled>No hay bases disponibles</option>
+                                            {% endif %}
+                                        </select>
+                                    </form>
+                                </td>
+                                <td class="fuente" style="color: black;">{{ nombre_b }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="{{ url_for('oficina') }}" method="POST">
+                                        <input type="hidden" name="form_submitted" value="2">
+                                        <select class="fuente" style="color: black; width: 120px;" name="escolta_seleccionado" onchange="this.form.submit()">
+                                            <option value="">ESCOLTA</option>
+                                            {% if bases %}
+                                                {% for base in bases %}
+                                                    <option value="{{ base }}" {% if base == escolta_seleccionado %}selected{% endif %}>{{ base }}</option>
+                                                {% endfor %}
+                                            {% else %}
+                                                <option value="" disabled>No hay bases disponibles</option>
+                                            {% endif %}
+                                        </select>
+                                    </form>
+                                </td>
+                                <td class="fuente" style="color: black;">{{ nombre_e }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="{{ url_for('oficina') }}" method="POST">
+                                        <input type="hidden" name="form_submitted" value="3">
+                                        <select class="fuente" style="color: black; width: 120px;" name="alero_seleccionado" onchange="this.form.submit()">
+                                            <option value="">ALERO</option>
+                                            {% if aleros %}
+                                                {% for alero in aleros %}
+                                                    <option value="{{ alero }}" {% if alero == alero_seleccionado %}selected{% endif %}>{{ alero }}</option>
+                                                {% endfor %}
+                                            {% else %}
+                                                <option value="" disabled>No hay aleros disponibles</option>
+                                            {% endif %}
+                                        </select>
+                                    </form>
+                                </td>
+                                <td class="fuente" style="color: black;">{{ nombre_a }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="{{ url_for('oficina') }}" method="POST">
+                                        <input type="hidden" name="form_submitted" value="4">
+                                        <select class="fuente" style="color: black; width: 120px;" name="ala_pivot_seleccionado" onchange="this.form.submit()">
+                                            <option value="">ALA-PIVOT</option>
+                                            {% if pivots %}
+                                                {% for pivot in pivots %}
+                                                    <option value="{{ pivot }}" {% if pivot == ala_pivot_seleccionado %}selected{% endif %}>{{ pivot }}</option>
+                                                {% endfor %}
+                                            {% else %}
+                                                <option value="" disabled>No hay ala-pivots disponibles</option>
+                                            {% endif %}
+                                        </select>
+                                    </form>
+                                </td>
+                                <td class="fuente" style="color: black;">{{ nombre_al }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="{{ url_for('oficina') }}" method="POST">
+                                        <input type="hidden" name="form_submitted" value="5">
+                                        <select class="fuente" style="color: black; width: 120px;" name="pivot_seleccionado" onchange="this.form.submit()">
+                                            <option value="">PIVOT</option>
+                                            {% if pivots %}
+                                                {% for pivot in pivots %}
+                                                    <option value="{{ pivot }}" {% if pivot == ala_pivot_seleccionado %}selected{% endif %}>{{ pivot }}</option>
+                                                {% endfor %}
+                                            {% else %}
+                                                <option value="" disabled>No hay pivots disponibles</option>
+                                            {% endif %}
+                                        </select>
+                                    </form>
+                                </td>
+                                <td class="fuente" style="color: black;">{{ nombre_p }}</td>
+                            </tr>
+                        </table>
+
+                        <h4 class="card-title mt-4">BANQUILLO</h4>
+                        <table>
+                            <tr>
+                                <th class="fuente" style="color: black; font-weight: bold;">JUGADORES SUPLENTES</th>
+                                <td class="fuente" style="color: black;">
+                                    {% for jugadores in banquillo %}
+                                    <!-- Aquí puedes listar los jugadores suplentes -->
+                                    {{jugadores.nombre}}<br>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

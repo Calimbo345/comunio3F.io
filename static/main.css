@@ -1,0 +1,132 @@
+body{
+    background: #f7971e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7971e, #ffd200); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7971e, #ffd200); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+table{
+    color: #000000; /* Negro puro */
+    font-weight: 600; /* Hace el texto más grueso */
+
+}
+
+.btn-uniforme {
+    width: 120px; /* Ajusta este valor según tus necesidades */
+    height: 35px; /* Ajusta la altura si es necesario */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px; /* Añade un pequeño margen entre botones si lo deseas */
+}
+
+.rounded-custom {
+    border-radius: 15px; /* Ajusta este valor según lo necesites */
+    box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.8); /* Sombra más intensa */
+}
+
+.fuente{
+    font-family: "Electrolize", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #FFFFFF; /* Texto en blanco */
+    font-size: 14px; /* Aumenta el tamaño a 18 píxeles */
+    /* background-color: #000000;  Fondo negro para contraste */
+}
+
+.fuente_oscuro{
+    font-family: "Electrolize", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #000000;
+    font-size: 14px; /* Aumenta el tamaño a 18 píxeles */
+    /* background-color: #000000;  Fondo negro para contraste */
+}
+
+.fuente_neon {
+    color: #fff; /* Color del texto */
+    font-size: 48px; /* Tamaño de la fuente */
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #ff00de,
+        0 0 20px #ff00de,
+        0 0 30px #ff00de; /* Efecto de resplandor */
+}
+
+.navbar-nav.shift-right {
+    margin-left: 4cm; /* Ajusta este valor según necesites */
+
+}
+.nav_transparente{
+    border-radius: 12px;
+    background: #ffffff1a;
+    border: 1px solid #ffffff20;
+    backdrop-filter: blur(16px) saturate(120%)
+}
+
+.icono-desplazado {
+    margin-top: 0.3cm; /* Ajusta este valor según lo necesites */
+    display: inline-block; /* Asegura que el margen se aplique correctamente */
+}
+
+/* From Uiverse.io by satyamchaudharydev */
+/* === removing default button style ===*/
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* button styling */
+.button {
+  --border-right: 6px;
+  --text-stroke-color: rgba(255,255,255,0.6);
+  --animation-color: #37FF8B;
+  --fs-size: 3em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Electrolize", sans-serif;
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.button:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item{
+    flex-grow: 1;
+    flex-basis: 200;
+}

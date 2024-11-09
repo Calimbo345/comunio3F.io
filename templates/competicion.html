@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+
+    <style>
+        .back-button {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 100px solid #000000; /* Aumentar para un triángulo más grande */
+            border-left: 100px solid transparent;
+            background: none;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .back-button::after {
+            content: "←";
+            position: absolute;
+            top: -90px;
+            right: 15px;
+            color: white;
+            font-size: 30px; /* Aumentar el tamaño de la flecha */
+        }
+    </style>
+    <a href="{{ url_for('oficina') }}" class="back-button fuente_neon" title="Atrás"></a>
+</head>
+<body style="min-height: 100vh; width: 100%;">
+    <main class="container p-4 main-container">
+        <div class="container-fluid d-flex align-items-center justify-content-center py-5" style="min-height: 30vh;">
+            <div class="row w-100">
+                <div class="col-12 text-center">
+                    <h1 class="display-5 mb-3 fuente_oscuro" style="font-size: 30px;">COMPETICIÓN</h1>
+                    <h2 class="display-6 fuente_oscuro">LIGA-COMUNIO</h2>
+                </div>
+            </div>
+        </div>
+        <div class="titulo-container">
+            <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <form class="d-flex align-items-center w-100" action="/competicion" method="POST">
+                        <input class="form-control me-3 fuente" type="text" name="unirse_liga" placeholder="Nombre de la liga" aria-label="Nombre de la liga">
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-sm btn-uniforme fuente button" data-text="Awesome">
+                                <span class="actual-text">&nbsp;UNIRSE&nbsp;</span>
+                                <span aria-hidden="true" class="hover-text">&nbsp;UNIRSE&nbsp;</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <div class="table-responsive mt-5 mb-4 card-header">
+                        <table class="table table-hover" style="background-color: white;">
+                            <thead>
+                                <tr style="background-color: black; color: white;">
+                                    <th class="fuente" scope="col" style="font-weight: bold;"></th>
+                                    <th class="fuente" scope="col" style="font-weight: bold;">NOMBRE</th>
+                                    <th class="fuente" scope="col" style="font-weight: bold;">VICTORIAS</th>
+                                    <th class="fuente" scope="col" style="font-weight: bold;">DERROTAS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usuario in lista_liga %}
+                                <tr>
+                                    <td class="fuente" data-label="Posición" style="color: black; font-weight: bold;">{{ posiciones.get(usuario.nombre, 'N/A') }}</td>
+                                    <td class="fuente" data-label="Nombre" style="color: black; font-weight: bold;">{{ usuario.nombre }}</td>
+                                    <td class="fuente" data-label="Victorias" style="color: black; font-weight: bold;">{{ usuario.victorias }}</td>
+                                    <td class="fuente" data-label="Derrotas" style="color: black; font-weight: bold;">{{ usuario.derrotas }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive mt-5 mb-4 card-body">
+                        <table class="table table-hover" style="background-color: white;">
+                            <thead>
+                                <tr style="background-color: black; color: white;">
+                                    <th class="fuente" style="font-weight: bold;">RESULTADOS JORNADA 1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for local, visitante, pts_local, pts_visitante in calendario %}
+                                <tr>
+                                    <td class="fuente" align="center" style="color: black; font-weight: bold;">
+                                        <span style="color: black; font-weight: bold;">{{ local }}</span>
+                                        <span style="color: black; font-weight: bold;">{{ pts_local }}</span>
+                                        -<span style="color: black; font-weight: bold;">{{ pts_visitante }}</span>
+                                        <span style="color: black; font-weight: bold;">{{ visitante }}</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

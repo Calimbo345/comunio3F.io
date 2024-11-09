@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <!--VINCULAR EL HTML CON EL CSS (MAIN.CSS) -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
+
+    <!--TEMA DE BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/lux/bootstrap.min.css" integrity="sha384-9+PGKSqjRdkeAU7Eu4nkJU8RFaH8ace8HGXnkiKMP9I9Te0GJ4/km3L1Z8tXigpG" crossorigin="anonymous">
+
+    <!--FUENTE DE GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+
+     <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .back-button {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 100px solid #000000; /* Aumentar para un triángulo más grande */
+            border-left: 100px solid transparent;
+            background: none;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .back-button::after {
+            content: "←";
+            position: absolute;
+            top: -90px;
+            right: 15px;
+            color: white;
+            font-size: 30px; /* Aumentar el tamaño de la flecha */
+        }
+    </style>
+
+    <a href="{{ url_for('oficina') }}" class="back-button fuente_neon" title="Atrás"></a>
+</head>
+<body>
+
+
+    <main class="container p-4" style="width: 100%; max-width: none;">
+        <div class="container-fluid d-flex align-items-center justify-content-center py-5" >
+            <div class="row w-100">
+                <div class="col-12 text-center">
+                    <h1 class="display-5 mb-4 fuente_oscuro" style="font-size: 30px;">MERCADO DE JUGADORES</h1>
+                    <h2 class="display-6 fuente_oscuro">JUGADORES DISPONIBLES</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container" >
+            <div class="table-responsive rounded-custom" >
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="fuente" scope="col" style="width: 20%">Nombre</th>
+                            <th class="fuente" scope="col" style="width: 20% text-align: center;">Equipo</th>
+                            <th class="fuente" scope="col" style="width: 15% text-align: center;">Lesión</th>
+                            <th class="fuente" scope="col" style="width: 15% text-align: center;">Posición</th>
+                            <th class="fuente" scope="col" style="width: 15% text-align: center;">Valoración</th>
+                            <th class="fuente" scope="col" style="width: 30% text-align: center;">Valor de Mercado</th>
+                            <th class="fuente" scope="col" style="width: 30%">Disponibilidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for jugador in jugadores %}
+                        <tr class="table-light">
+                            <td class="fuente" style="color: black; font-weight: bold;">{{ jugador.nombre }}</td>
+                            <td class="fuente" style="color: black; font-weight: bold; text-align: center;">{{ jugador.equipo }}</td>
+                            <td class="fuente" style="color: black; font-weight: bold; text-align: center;">{{ jugador.lesion }}</td>
+                            <td class="fuente" style="color: black; font-weight: bold; text-align: center;">{{ jugador.posicion }}</td>
+                            <td class="fuente" style="color: black; font-weight: bold; text-align: center;">{{ jugador.media }}</td>
+                            <td class="fuente" style="color: black; font-weight: bold; text-align: center;">{{ jugador.val_mercado }}€</td>
+                            <td>
+                                <form action="/compraventa" method="POST">
+                                    <input type="hidden" name="jugador_nombre" value="{{ jugador.nombre }}">
+                                    <button type="submit" class="btn btn-primary btn-sm btn-uniforme fuente button" data-text="Awesome">
+                                        <span class="actual-text">&nbsp;COMPRAR&nbsp;</span>
+                                        <span aria-hidden="true" class="hover-text">&nbsp;COMPRAR&nbsp;</span>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
+
+
+
+
+
+
+
